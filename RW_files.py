@@ -536,7 +536,7 @@ class Help():
                 rows[idx]=rows[idx].ljust(cmax[idx])
         return new_data
 
-    def read_UV_Vis(self,filename,filetype):
+    def read_UV_Vis(filename,filetype):
         if filetype=='E60 files':
             tmp=Read_from.dsp(filename)
             convert_unit_IHTM(tmp,'','y1')
