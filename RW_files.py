@@ -7,6 +7,7 @@ Created on Wed May 18 16:19:18 2022
 """
 from numpy import array, linspace, savetxt, shape, swapaxes, sort
 from os import path
+from submodules.DataProcess import convert_unit_IHTM
 
 #for loading a file you need first read function that reads it
 #then you need process functions that are processing it
@@ -534,6 +535,19 @@ class Help():
             for idx in range(0,len(rows)):
                 rows[idx]=rows[idx].ljust(cmax[idx])
         return new_data
+
+    def read_UV_Vis(self,filename,filetype):
+        if filetype=='E60 files':
+            tmp=Read_from.dsp(filename)
+            convert_unit_IHTM(tmp,'','y1')
+            convert_unit_IHTM(tmp,'n','x1')
+        elif filetype=='IHTM E60':
+            tmp=Read_from.ihtm(filename)
+            convert_unit_IHTM(tmp,'','y1')
+        elif filetype=='UniNova':
+            tmp=Read_from.uninova(filename)
+            convert_unit_IHTM(tmp,'','y1')
+        return tmp
     
 class Write_to():
     #for writing ini or any other files related to the app (current extensions ini or inst)
